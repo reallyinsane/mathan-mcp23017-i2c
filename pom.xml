@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.mathan.breakout</groupId>
+  <artifactId>mathan-mcp23017-i2c</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <license.name>AL2</license.name>
+    <license.title>${project.name}</license.title>
+    <license.owner>Matthias Hanisch</license.owner>
+    <license.mailto>matthias@mathan.io</license.mailto>
+    <license.years>2020</license.years>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>AL2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Matthias Hanisch</name>
+      <email>matthias@mathan.io</email>
+      <url>https://github.com/reallyinsane</url>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <!--
+    Library yad2xx from https://sourceforge.net/projects/yad2xx/ used by linking library dynamically.
+    License of library is LGPL3.
+    Linking of library can be changed by changing this dependency.
+    Binary version of the library is available in sub directory lib/yad2xx with its license files. Source
+    code was not provided by the author and can be found on https://sourceforge.net/projects/yad2xx/.
+    -->
+    <dependency>
+      <groupId>net.sf.ftd2xxj</groupId>
+      <artifactId>ftd2xxj</artifactId>
+      <version>2.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/yad2xx/yad2xxJava-1.0.jar</systemPath>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <header>doc/license.header</header>
+          <failIfMissing>true</failIfMissing>
+          <strictCheck>true</strictCheck>
+          <properties>
+            <license.owner>${license.owner}</license.owner>
+            <license.years>${license.years}</license.years>
+            <license.mailto>${license.mailto}</license.mailto>
+            <license.title>${license.title}</license.title>
+          </properties>
+          <mapping>
+            <java>SLASHSTAR_STYLE</java>
+          </mapping>
+          <includes>
+            <include>src/*/java/**/*.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
