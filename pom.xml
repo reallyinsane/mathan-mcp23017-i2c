@@ -16,6 +16,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  <name>Java-Library for MCP23017 via I2CC</name>
+  <description>A Java-Library using yad2xxJava for accessing MCP23017 via I2C protocol.</description>
+  <url>https://github.com/reallyinsane/mathan-mcp23017-i2c</url>
 
   <licenses>
     <license>
@@ -32,6 +35,12 @@
       <url>https://github.com/reallyinsane</url>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/reallyinsane/mathan-mcp23017-i2c.git</connection>
+    <developerConnection>scm:git:ssh://github.com/reallyinsane/mathan-mcp23017-i2c.git</developerConnection>
+    <url>https://github.com/reallyinsane/mathan-mcp23017-i2c/tree/master</url>
+  </scm>
 
   <dependencies>
     <!--
